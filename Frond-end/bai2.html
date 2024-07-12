@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./css/bai2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="./asset/ttt.gif" alt="Title image" draggable="false">
+    </header>
+    <section id="content">
+        <div id="left-char" class="char"><span>You</span></div>
+        <div id="main">
+            <div id="turn">
+                <span><strong>Lượt tiếp theo :</strong></span>
+                <img id="next-turn" width="40" height="40" draggable="false">
+            </div>
+    
+            <div class="chess-table">
+                <div class="row">
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                </div>
+                <div class="row">
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                </div>
+                <div class="row">
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                </div>
+            </div>
+            <div id="control-zone">
+                <div id="new-game">
+                    <img 
+                        src="./asset/circle-buttons-with-cheese-texture-icons/restart_button.png"
+                        width="60"
+                        height="60"
+                        draggable="false"
+                        onclick="restart()"
+                    />
+                </div>
+                <div id="back">
+                    <img 
+                        src="./asset/circle-buttons-with-cheese-texture-icons/back_button.png"
+                        width="60"
+                        height="60"
+                        draggable="false"
+                    />
+                </div>
+            </div>
+        </div>
+        <div id="right-char" class="char"><span>Enemy</span></div>
+    </section>
+
+    <script src="./script/bai1.js"></script>
+</body>
+</html>
