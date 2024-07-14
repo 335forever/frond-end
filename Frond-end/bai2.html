@@ -11,8 +11,35 @@
     <header>
         <img src="./asset/ttt.gif" alt="Title image" draggable="false">
     </header>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="modal login" id="loginModal">
+        <div class="login-modal-header">
+            <h1>Quick start <i>easy</i></h1>
+            <p><span id="online-num"></span> player online now</p>
+        </div>
+        
+        <form id="loginForm">
+            <label for="name">Your Name:<input type="text" id="name" name="name" required></label>
+            
+            <label>Select Avatar:</label>
+            <div id="avatar-selection"></div>
+
+            <button type="submit">Find match</button>
+        </form>
+    </div>
+
+    <div class="modal loading" id="loadingModal">
+        <img src="./asset/search.gif" alt="Searching">
+    </div>
+    
     <section id="content">
-        <div id="left-char" class="char"><span>You</span></div>
+        <div class="player">
+            <div id="left-char" class="char"></div>
+            <span id="your-name"></span>
+        </div>
+        
         <div id="main">
             <div id="turn">
                 <span><strong>Lượt tiếp theo :</strong></span>
@@ -39,16 +66,15 @@
             <div id="control-zone">
                 <div id="new-game">
                     <img 
-                        src="./asset/circle-buttons-with-cheese-texture-icons/restart_button.png"
+                        src="./asset/buttons/restart_button.png"
                         width="60"
                         height="60"
                         draggable="false"
-                        onclick="restart()"
                     />
                 </div>
                 <div id="back">
                     <img 
-                        src="./asset/circle-buttons-with-cheese-texture-icons/back_button.png"
+                        src="./asset/buttons/back_button.png"
                         width="60"
                         height="60"
                         draggable="false"
@@ -56,9 +82,13 @@
                 </div>
             </div>
         </div>
-        <div id="right-char" class="char"><span>Enemy</span></div>
+        
+        <div class="player enemy">
+            <div id="right-char" class="char"></div>
+            <span id="enemy-name"></span>
+        </div>   
     </section>
 
-    <script src="./script/bai1.js"></script>
+    <script src="./script/bai2.js"></script>
 </body>
 </html>

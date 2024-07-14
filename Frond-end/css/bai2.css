@@ -24,7 +24,7 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    filter: blur(10px);
+    filter: blur(8px);
     z-index: -1;
 }
 
@@ -34,6 +34,132 @@ header img {
     height: 100px;
     max-height: 8vw;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 5px;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    max-width: 90%;
+}
+
+.modal.login {
+    padding: 20px;
+}
+
+.login-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    height: fit-content;
+    border-bottom: solid;
+}
+
+.login-modal-header h1 {
+    margin: 0;
+}
+
+.login-modal-header h1 > i{
+    color: pink;
+    font-size: 48px;
+}
+
+.login-modal-header p {
+    border: 1px solid pink;
+    border-radius: 5px;
+    height: fit-content;
+    margin:  0;
+    padding: 5px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login label {
+    margin-top: 10px;
+}
+
+.login input {
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#avatar-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    align-items: center;
+    justify-items: center;
+    padding: 10px;
+    border: 5px solid pink;
+    border-radius: 5px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 5px;
+}
+
+.avatar.selected {
+    border-color: #007BFF;
+    border-radius: 10px;
+}
+
+.login button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 30%;
+}
+
+.login button:hover {
+    background-color: #0056b3;
+}
+
+/**************************************************/
+
+.loading {
+    width: 300px;
+    height: 300px;
+    display: none;
+    justify-content: center;
+    align-items: center; 
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+
+.loading img {
+    max-width: 200%; 
+    max-height: 200%; 
+    display: block; 
+}
+
+/**************************************************/
 
 .chess-table {
     display:flex;
@@ -74,7 +200,7 @@ header, #content {
 
 #content {
     margin-top: 10px;
-    display: flex;
+    display: none;
     gap: 10vw;
     align-items: center;
 }
@@ -107,9 +233,19 @@ header, #content {
 }
 
 /**************************************/
+.player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #052530;
+    gap: 10px;
+}
 
 .char {
-    width: 15vw;
+    width: 20vw;
     height: 20vw;
     overflow: hidden;
     position: relative;
@@ -120,12 +256,17 @@ header, #content {
     background-color: rgb(205, 204, 204);
 }
 
+.char img {
+    width: 80%;
+    height: 80%;
+}
+
 .char::before {
     position: absolute;
     content: "";
     width: 50%;
-    height: 180%;
-    transform: rotate(-40deg);
+    height: 140%;
+    transform: rotate(-45deg);
 }
 
 .char.animate::before {
@@ -133,11 +274,13 @@ header, #content {
 }
 
 #left-char::before {
-    background-color: rgb(97, 219, 99);
+    /* background-color: rgb(97, 219, 99); */
+    background: linear-gradient(to right, #006400, #228B22, #32CD32, #7CFC00, #ADFF2F);
 }
 
 #right-char::before {
-    background-color: rgb(235, 99, 103);
+    /* background-color: rgb(235, 99, 103); */
+    background: linear-gradient(to right, #8B0000, #B22222, #FF0000, #FF6347, #FF7F50, #FFA07A, #FFDAB9);
 }
 
 .char::after {
@@ -155,10 +298,10 @@ header, #content {
 
 @keyframes ani2 {
     from {
-        transform: rotate(-40deg);
+        transform: rotate(-45deg);
     }
     to {
-        transform: rotate(320deg);
+        transform: rotate(315deg);
     }
 }
 
@@ -183,4 +326,14 @@ header, #content {
     #control-zone img:active {
         transform: scale(1.1);
     }
+
+    .player {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .enemy {
+        flex-direction: row-reverse;
+    }
+    
 }
