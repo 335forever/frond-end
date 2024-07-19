@@ -1,6 +1,8 @@
 * {
     box-sizing: border-box;
     user-select: none;
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -37,6 +39,7 @@ header img {
 
 .overlay {
     position: fixed;
+    display: block;
     top: 0;
     left: 0;
     width: 100%;
@@ -51,15 +54,16 @@ header img {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 500px;
     max-width: 90%;
 }
 
-.modal.login {
+#loginModal {
     padding: 20px;
+    display: none;
 }
 
 .login-modal-header {
@@ -87,16 +91,16 @@ header img {
     padding: 5px;
 }
 
-.login form {
+#loginModal form {
     display: flex;
     flex-direction: column;
 }
 
-.login label {
+#loginModal label {
     margin-top: 10px;
 }
 
-.login input {
+#loginModal input {
     padding: 8px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -126,7 +130,7 @@ header img {
     border-radius: 10px;
 }
 
-.login button {
+#loginModal button {
     padding: 10px;
     background-color: #007BFF;
     color: white;
@@ -137,26 +141,33 @@ header img {
     width: 30%;
 }
 
-.login button:hover {
+#loginModal button:hover {
     background-color: #0056b3;
 }
 
 /**************************************************/
 
-.loading {
+#loadingModal {
+    display: none;
     width: 300px;
     height: 300px;
-    display: none;
     justify-content: center;
     align-items: center; 
     border-radius: 50%; 
     overflow: hidden; 
 }
 
-.loading img {
+#loadingModal img {
     max-width: 200%; 
     max-height: 200%; 
     display: block; 
+}
+
+#exit-find {
+    position: absolute;
+    top: 80%;
+    height: 25px;
+    padding: 0 2px;
 }
 
 /**************************************************/
@@ -174,8 +185,8 @@ header img {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     background-color: rgb(189, 189, 189);
     margin: 1px;
     display: flex;
@@ -199,8 +210,8 @@ header, #content {
 }
 
 #content {
-    margin-top: 10px;
     display: none;
+    margin-top: 10px;
     gap: 10vw;
     align-items: center;
 }
@@ -242,6 +253,10 @@ header, #content {
     font-weight: bold;
     color: #052530;
     gap: 10px;
+}
+
+.player span {
+    text-align: center;
 }
 
 .char {
@@ -337,3 +352,114 @@ header, #content {
     }
     
 }
+
+#dashboard {
+    width: 600px;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.star-img {
+    width: 60px;
+    height: 60px;
+}
+
+#your-info, #ranking {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+#your-info {
+    gap: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    border-right: 2px dashed;
+    background-color: rgb(196, 158, 158);
+    color: rgb(255, 233, 176);
+}
+
+#your-info #avatar {
+    width: 90%;
+    border-radius: 15%;
+    padding: 10px;
+    background-color: rgb(226, 226, 226);
+}
+
+#your-name-dashboard {
+    text-align: center;
+}
+
+#your-info #score {
+    display: flex;
+    align-items: center;
+}
+
+#find-match {
+    height: 30px;
+    width: 50%;
+}
+
+/******************************************************/
+
+#ranking {
+    background-color: rgb(68, 173, 238);
+    gap: 5px;
+}
+
+#ranking > p {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#ranking .rank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: fit-content;
+    font-size: 24px;
+    padding:  0 10px;
+    border-radius: 15px;
+}
+
+.rank-row .rank-cell {
+    display: flex;
+    align-items: center;
+}
+
+.rank-row:nth-of-type(1) {
+    background-color: rgb(254, 106, 113);
+}
+
+.rank-row:nth-of-type(2) {
+    
+    background-color: rgb(249, 125, 172);
+}
+
+.rank-row:nth-of-type(3) {
+    background-color: rgb(247, 246, 167);
+}
+
+.rank-row:nth-of-type(4) {
+    background-color: rgb(184, 255, 154);
+}
+
+.rank-row:nth-of-type(5) {
+    background-color: rgb(165, 247, 237);
+}
+
+#resultModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+

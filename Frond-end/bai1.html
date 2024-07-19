@@ -11,227 +11,104 @@
     <header>
         <h1>Danh sách sinh viên</h1>
     </header>
+
+    <div id="overlay"></div>
+
+    <div id="update-form">
+        <p>Cập nhật thông tin</p>
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <th>MSSV <span class="required-mark">*</span></th>
+                    <td>
+                        <input type="text" name="mssv" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tên sinh viên <span class="required-mark">*</span></th>
+                    <td>
+                        <input type="text" name="name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ngày sinh</th>
+                    <td>
+                        <input type="date" name="dob">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Giới tính</th>
+                    <td id="gender-panel">
+                        <label><input type="radio" name="gender">Nam</label>
+                        <label><input type="radio" name="gender">Nữ</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Khoa <span class="required-mark">*</span></th>
+                    <td>
+                        <input type="text" name="major" required>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="OK">
+        </form>
+    </div>
+
     <section id="content">
         <fieldset id="update-zone">
             <legend>Cập nhật</legend>
             
             <div id="search-bar">
-                <input type="text" name="key" placeholder="Thông tin sinh viên"><input id="find-button" type="button" value="Tìm">
+                <input id="search" type="text" name="key" placeholder="Thông tin sinh viên"><input id="find-button" type="button" value="Tìm">
             </div>
             
             <div id="results-container">
-                <table>
-                    <caption>Kết quả tìm kiếm</caption>
-                    <tr>
-                        <th>MSSV</th>
-                        <th>Tên sinh viên</th>
-                        <th>Ngày sinh</th>
-                        <th>Giới tính</th>
-                        <th>Khoa</th>
-                        <th>Thao tác</th>
-                    </tr>
-                    <tr>
-                        <td>20204774</td>
-                        <td >Nguyễn Đức Quân</td>
-                        <td>22/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20204774</td>
-                        <td>Nguyễn Đức Quân</td>
-                        <td>22/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20204774</td>
-                        <td >Nguyễn Đức Quân</td>
-                        <td>22/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20204774</td>
-                        <td>Nguyễn Đức Quân</td>
-                        <td>22/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20200180</td>
-                        <td>Trần Bách Lưu Đức</td>
-                        <td>20/06/2002</td>
-                        <td>Nam</td>
-                        <td>IT2</td>
-                        <td>
-                            <div class="row-panel">
-                                <button class="update-button">Cập nhật</button>
-                                <button class="delete-button">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
+                <table id="table">
                 </table>
             </div>
         </fieldset>
 
         <fieldset id="insert-zone">
             <legend>Tạo mới</legend>
-            <form action="" method="post">
+            <form id="insert">
                 <table>
                     <tr>
                         <th>MSSV <span class="required-mark">*</span></th>
                         <td>
-                            <input type="text" name="mssv" required>
+                            <input id="insert-mssv" type="text" name="mssv" required>
                         </td>
                     </tr>
                     <tr>
                         <th>Tên sinh viên <span class="required-mark">*</span></th>
                         <td>
-                            <input type="text" name="name" required>
+                            <input id="insert-name" type="text" name="name" required>
                         </td>
                     </tr>
                     <tr>
                         <th>Ngày sinh</th>
                         <td>
-                            <input type="date" name="dob">
+                            <input id="insert-dob" type="date" name="dob">
                         </td>
                     </tr>
                     <tr>
                         <th>Giới tính</th>
                         <td id="gender-panel">
-                            <label><input type="radio" name="gender">Nam</label>
-                            <label><input type="radio" name="gender">Nữ</label>
+                            <label><input type="radio" name="gender" value="nam" required>Nam</label>
+                            <label><input type="radio" name="gender" value="nu" required>Nữ</label>
                         </td>
                     </tr>
                     <tr>
                         <th>Khoa <span class="required-mark">*</span></th>
                         <td>
-                            <input type="text" name="major" required>
+                            <input id="insert-major" type="text" name="major" required>
                         </td>
                     </tr>
                 </table>
                 <input type="submit" value="Thêm">
             </form>
-       
-            
         </fieldset>
     </section>
     
+    <script src="./script/bai1.js"></script>
 </body>
 </html>
