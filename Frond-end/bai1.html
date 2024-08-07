@@ -16,37 +16,39 @@
 
     <div id="update-form">
         <p>Cập nhật thông tin</p>
-        <form action="" method="post">
+        <form>
             <table>
                 <tr>
                     <th>MSSV <span class="required-mark">*</span></th>
                     <td>
-                        <input type="text" name="mssv" required>
+                        <input id="update-mssv" type="text" name="mssv" required>
                     </td>
                 </tr>
                 <tr>
                     <th>Tên sinh viên <span class="required-mark">*</span></th>
                     <td>
-                        <input type="text" name="name" required>
+                        <input id="update-name" type="text" name="name" required>
                     </td>
                 </tr>
                 <tr>
                     <th>Ngày sinh</th>
                     <td>
-                        <input type="date" name="dob">
+                        <input id="update-dob" type="date" name="dob">
                     </td>
                 </tr>
                 <tr>
                     <th>Giới tính</th>
                     <td id="gender-panel">
-                        <label><input type="radio" name="gender">Nam</label>
-                        <label><input type="radio" name="gender">Nữ</label>
+                        <label><input type="radio" name="update-gender" value="Nam">Nam</label>
+                        <label><input type="radio" name="update-gender" value="Nữ">Nữ</label>
                     </td>
                 </tr>
                 <tr>
                     <th>Khoa <span class="required-mark">*</span></th>
                     <td>
-                        <input type="text" name="major" required>
+                        <select id="update-major" name="major" required>
+                            <option value="" disabled>Chọn khoa</option>
+                        </select>
                     </td>
                 </tr>
             </table>
@@ -55,19 +57,6 @@
     </div>
 
     <section id="content">
-        <fieldset id="update-zone">
-            <legend>Cập nhật</legend>
-            
-            <div id="search-bar">
-                <input id="search" type="text" name="key" placeholder="Thông tin sinh viên"><input id="find-button" type="button" value="Tìm">
-            </div>
-            
-            <div id="results-container">
-                <table id="table">
-                </table>
-            </div>
-        </fieldset>
-
         <fieldset id="insert-zone">
             <legend>Tạo mới</legend>
             <form id="insert">
@@ -93,19 +82,45 @@
                     <tr>
                         <th>Giới tính</th>
                         <td id="gender-panel">
-                            <label><input type="radio" name="gender" value="nam" required>Nam</label>
-                            <label><input type="radio" name="gender" value="nu" required>Nữ</label>
+                            <label><input type="radio" name="gender" value="Nam">Nam</label>
+                            <label><input type="radio" name="gender" value="Nữ">Nữ</label>
                         </td>
                     </tr>
                     <tr>
                         <th>Khoa <span class="required-mark">*</span></th>
                         <td>
-                            <input id="insert-major" type="text" name="major" required>
+                            <select id="insert-major" name="major" required>
+                                <option value="" selected disabled>Chọn khoa</option>
+                            </select>
                         </td>
                     </tr>
                 </table>
                 <input type="submit" value="Thêm">
             </form>
+        </fieldset>
+        
+        <fieldset id="update-zone">
+            <legend>Trang chủ</legend>
+            
+            <input id="search" type="text" name="key" placeholder="Tên sinh viên">
+        
+            <div id="results-container">
+                <button id="delete-rows-button">Xoá hàng đã chọn</button>
+                <table>
+                    <caption>Kết quả tìm kiếm</caption>
+                    <thead>
+                        <th></th>
+                        <th>MSSV</th>
+                        <th>Tên sinh viên</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>Khoa</th>
+                        <th>Thao tác</th>
+                    </thead>
+            
+                    <tbody id="table"></tbody>
+                </table>
+            </div>
         </fieldset>
     </section>
     

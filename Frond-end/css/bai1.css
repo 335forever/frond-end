@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
-    /* border:1px solid; */
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -20,61 +21,47 @@ h1 {
 }
 
 #content {
-    width: 1400px;
-    max-width: 70%;
+    width: fit-content;
     margin: 30px auto;
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 
 fieldset {
-    height: fit-content;
     background-color: rgb(251, 214, 214);
     border: 5px solid rgb(208, 207, 207);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    padding: 5px 15px;
+    gap: 20px;
 }
 
-#update-zone {
-    width: 70%;
+#delete-rows-button {
+    margin: 0 auto;
 }
 
-#insert-zone {
-    width: 30%;
-}
-
-#search-bar {
-    width: 80%;
-    margin: 10px auto;
-    background-color: white;
-}
-
-#search-bar input[type="text"] {
+#search {
     width: 80%;
     height: 30px;
+    background-color: white;
     border: none;
     padding-left: 10px;
 }
 
-#search-bar input[type="button"] {
-    width: 20%;
-    height: 30px;
-    border: none;
-    background-color: pink;
-    cursor: pointer;
-    padding: 3px;
-}
-
-#search-bar input[type="button"]:active {
-    background-color: rgb(142, 140, 176);
-}
-
 #results-container {
-    width: 95%;
-    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
 }
 
-table {
-    width: 100%;
+#results-container #delete-rows-button {
+    margin-right: 0px;
+    font-size: 14px;
+    padding: 2px 5px;
+    cursor: pointer;
 }
 
 table,th,td {
@@ -82,43 +69,43 @@ table,th,td {
     border-collapse: collapse;
 }
 
-tr {
+#results-container tbody > tr {
     background-color:rgb(255, 227, 232);
 }
 
-#results-container tr:first-child {
+#results-container tbody > tr > td {
+    padding: 5px 10px;
+}
+
+#results-container tbody input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#results-container thead {
     background-color:pink;
 }
 
-#results-container tr:not(:first-child):hover {
+#results-container tbody > tr:hover {
     background-color: rgb(219, 180, 180);
 }
 
-
-#results-container th:first-child {
-    width: 15%;
+#results-container th {
+    width: fit-content;
+    padding: 5px 10px;
 }
 
-#results-container th:nth-child(2) {
-    width: 30%;
-}
-
-#results-container th:nth-child(3) {
-    width: 15%;
-}
-
-#results-container th:nth-child(4) {
-    width: 12%;
-}
-
-#results-container th:nth-child(5) {
-    width: 8%;
-}
 
 .row-panel {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    gap: 10px;
+}
+
+.row-panel button {
+    font-size: 14px;
+    padding: 2px 5px;
+    cursor: pointer;
 }
 
 fieldset legend {
@@ -138,6 +125,7 @@ fieldset legend {
 
 #insert-zone td > input {
     width: 100%;
+
 }
 
 input[type="submit"] {
@@ -154,7 +142,7 @@ input[type="submit"] {
 
 #overlay {
     position: fixed;
-    display: block;
+    display: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -174,7 +162,7 @@ input[type="submit"] {
     width: 500px;
     max-width: 90%;
     height: fit-content;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     background-color: rgb(194, 248, 248);
@@ -190,8 +178,24 @@ input[type="submit"] {
     padding-left: 10px ;
 }
 
+#update-form form td {
+    padding: 2px;
+}
+
+#update-form form td input{
+    padding: 2px 5px;
+}
+
 #update-form p {
     font-size: 48px;
     margin: 0;
     color: rgb(249, 117, 128);
 }
+
+@media (max-width: 1000px) {
+    #content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+

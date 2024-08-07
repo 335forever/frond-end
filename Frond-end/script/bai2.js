@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const avatars = document.querySelectorAll('.avatar');
     avatars[0].classList.add('selected');
-    yourInfo.avatar = avatars[0].id; // Default firsr avatar 
+    yourInfo.avatar = avatars[0].id; // Default first avatar 
     avatars.forEach(avatar => {
         avatar.addEventListener('click', () => {
             avatars.forEach(av => av.classList.remove('selected'));
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         yourInfo.name = playerName.value;
 
-        const message =  {
+        const request =  {
             action: 'login',
             data: {
                 playerName : yourInfo.name,
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
   
         // Gửi thông tin login cho server
-        ws.send(JSON.stringify(message));
+        ws.send(JSON.stringify(request));
         
         const avatar = document.getElementById('avatar');
         avatar.src = `./asset/avatar-icon/Avatars Set Flat Style-${yourInfo.avatar}.png`;
@@ -85,24 +85,24 @@ document.addEventListener('DOMContentLoaded', () => {
         findMatch.addEventListener('click', () => {
             loadingState();
 
-            const exitFInd = document.getElementById('exit-find')
-            exitFInd.addEventListener('click', () => {
-                const message = {
+            const exitFind = document.getElementById('exit-find')
+            exitFind.addEventListener('click', () => {
+                const request = {
                     action: 'exit-find',
                     data: {
                         playerId: yourInfo.id
                     }
                 }
-                ws.send(JSON.stringify(message));
+                ws.send(JSON.stringify(request));
                 dashboardState()
             });
 
-            const message = {
+            const request = {
                 action: 'find',
                 data : yourInfo
             }
 
-            ws.send(JSON.stringify(message));
+            ws.send(JSON.stringify(request));
         })
     });
 });
@@ -148,19 +148,20 @@ function generateRandomSelection() {
     return selection.slice(0, 9);
 }
 
-function drawTable(table) {
+function drawTable(matchStatus) {
     const tableElement = document.getElementById('table');
     tableElement.innerHTML = null;
-
-    for (let row = 0; row < table.length; row++) {
+    for (let row = 0; row < matchStatus.tableSize.m; row++) {
         const newRow = document.createElement('div');
         newRow.className = 'row';
         
-        for (let cell = 0; cell < table[row].length; cell++) {
+        for (let cell = 0; cell < matchStatus.tableSize.n; cell++) {
             const newCell = document.createElement('div');
             newCell.className = 'cell';
-            newCell.id = `${row}_${cell}`
-            if (table[row][cell]) newCell.appendChild(newTick(table[row][cell]));
+            newCell.id = `${row}_${cell}`;
+            let mark = ''
+            matchStatus.moved.forEach((move)=>{if (move.position.x == row && move.position.y == cell) mark = move.mark});
+            if (mark) newCell.appendChild(newTick(mark));
             newRow.appendChild(newCell);
         }
 
@@ -171,10 +172,11 @@ function drawTable(table) {
     for (let cell of cells) {
         cell.addEventListener('click', () => {
             if (cell.children.length) return;
+            if (matchStatus.nextTurn != yourInfo.id) return;
             
             const [x, y] = cell.id.split('_').map(Number);
-            const message = {
-                action : 'tick',
+            const request = {
+                action : 'move',
                 data : {
                     matchId : yourInfo.matchId,
                     playerId : yourInfo.id,
@@ -182,8 +184,8 @@ function drawTable(table) {
                 }
             }
             
-            console.log(message)
-            ws.send(JSON.stringify(message));
+            console.log(request)
+            ws.send(JSON.stringify(request));
         })
     }
 }
@@ -232,7 +234,7 @@ function resultState(result) {
 /*********************************************** */
 
 // Kết nối đến WebSocket server
-const ws = new WebSocket('ws://10.0.1.159:8080');
+const ws = new WebSocket('ws://localhost:8080');
 
 // Lắng nghe sự kiện mở kết nối
 ws.onopen = function(event) {
@@ -241,26 +243,29 @@ ws.onopen = function(event) {
 
 // Lắng nghe tin nhắn từ server
 ws.onmessage = function(event) {
-    console.log(`Server says: ${event.data}`);
-    const data = JSON.parse(event.data);
+    const message = JSON.parse(event.data);
+    console.log(`Server says:`, message);
     
-    if (data.type == 'online_num') {
-        onlineNum.innerText = data.num;
+    
+    if (message.type == 'online_num') {
+        onlineNum.innerText = message.data.num;
     }
     
-    if (data.type == 'assign_id') {
-        const playerInfo = data.playerInfo;
+    if (message.type == 'assign') {
+        const playerInfo = message.data;
         
         yourInfo.id = playerInfo.id;
         yourInfo.starNum = playerInfo.starNum;
+        const starNum = document.getElementById('star-num');
+        starNum.innerText = yourInfo.starNum;
     }
     
-    if (data.type == 'match_start') {
+    if (message.type == 'match_start') {
         playingState();
 
         // Set match status
-        yourInfo.matchId = data.match_status.id;
-        drawTable(data.match_status.table);
+        yourInfo.matchId = message.data.matchStatus.matchId;
+        drawTable(message.data.matchStatus);
         
         // Set your status
         const leftCharImg = document.createElement('img');
@@ -273,30 +278,30 @@ ws.onmessage = function(event) {
         yourName.innerHTML = yourInfo.name;
         
         // Set enemy status
-        enemyName.innerText = data.enemy_info.name;
+        enemyName.innerText = message.data.enemyInfor.name;
         const rightCharImg = document.createElement('img');
-        rightCharImg.src = `./asset/avatar-icon/Avatars Set Flat Style-${data.enemy_info.avatar}.png`
+        rightCharImg.src = `./asset/avatar-icon/Avatars Set Flat Style-${message.data.enemyInfor.avatar}.png`
         rightCharImg.atl = 'Avatar'
         rightCharImg.draggable = false;
         rightChar.innerHTML = null;
         rightChar.appendChild(rightCharImg);
 
-        toggleTurn(data.match_status.turn, data.match_status.tick);
+        toggleTurn(message.data.matchStatus.nextTurn, message.data.matchStatus.nextMark);
     }
     
-    if (data.type == 'match_update') {
-        const table = data.match_status.table;
-        drawTable(table);
+    if (message.type == 'match_update') {
+        const tableStatus = message.data;
+        drawTable(tableStatus);
 
-        toggleTurn(data.match_status.turn, data.match_status.tick);
+        toggleTurn(tableStatus.nextTurn, tableStatus.nextMark);
 
-        if (data.match_status.winnerId) {
-            if (data.match_status.winnerId == yourInfo.id) resultState('win');
+        if (tableStatus.winner) {
+            if (tableStatus.winner.id == yourInfo.id) resultState('win');
             else resultState('lose');
         }
     }
 
-    if (data.type == 'enemy_quit') {
+    if (message.type == 'enemy_quit') {
         dashboardState();
 
         yourInfo.starNum = yourInfo.starNum + 1;
